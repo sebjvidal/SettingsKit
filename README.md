@@ -1,3 +1,14 @@
+<p align="center">
+    <img src="https://img.shields.io/badge/Swift-5.2-orange.svg" />
+    <a href="https://swift.org/package-manager">
+        <img src="https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat" alt="Swift Package Manager" />
+    </a>
+     <img src="https://img.shields.io/badge/platforms-iOS-brightgreen.svg?style=flat" alt="iOS" />
+    <a href="https://twitter.com/johnsundell">
+        <img src="https://img.shields.io/badge/twitter-@sebjvidal-blue.svg?style=flat" alt="Twitter: @sebjvidal" />
+    </a>
+</p>
+
 # SettingsKit
 
 A light-weight, extensible package for building iOS settings screens in a pinch.
