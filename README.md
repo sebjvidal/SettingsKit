@@ -21,7 +21,7 @@ SettingsKit can be installed using Swift Package Manager. To get started...
 4. Click `Add Package`
 
 ## Usage
-To create a new settings screen, create an array of `SettingsKitSections`. These sections can have an array of `children`, along with an optional `header` and `footer`.
+To create a new settings screen, create an array of `SettingsKitSections`. A section has a `children` and optional `header` and `footer` parameters.
 ```swift
 import SettingsKit
 
@@ -54,3 +54,13 @@ The `children` property of `SettingsKitSections` takes an array of `SettingsKitS
 
 ## About
 SettingsKit is built with UIKit, so you can customise the `SettingsKitViewController` as you would a `UITableViewController`.
+
+Be careful when overriding the `SettingsKitViewController` `tableView`'s delegate methods, as the following methods are used internally to make the package functional: 
+- `numberOfSections(in:)`
+- `tableView(_:titleForHeaderInSection:)`
+- `tableView(_:titleForFooterInSection:)`
+- `tableView(_:numberOfRowsInSection:)`
+- `tableView(_:cellForRowAt:)`
+- `tableView(_:heightForRowAt)`
+- `tableView(_:shouldHighlightRowAt:)`
+- `tableView(_:didSelectRowAt:)`
