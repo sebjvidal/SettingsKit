@@ -15,7 +15,7 @@
 
 # SettingsKit
 
-A light-weight, extensible package for building iOS settings screens in a pinch.
+A light-weight, extensible package for easily building pixel-perfect iOS settings screens in a pinch.
 
 ## Installation
 SettingsKit can be installed using Swift Package Manager. To get started...
