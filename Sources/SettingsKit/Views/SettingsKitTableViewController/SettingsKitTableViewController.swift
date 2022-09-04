@@ -7,18 +7,15 @@
 
 import UIKit
 
-public class SettingsKitTableViewController: UITableViewController, UISearchResultsUpdating {
+public class SettingsKitTableViewController: UITableViewController {
     var sections: [SettingsKitSecetion] = []
     var delegate: SettingsKitTableViewControllerDelegate?
-    
-    private let searchController = UISearchController()
     
     public init(sections: [SettingsKitSecetion], style: UITableView.Style = .insetGrouped) {
         super.init(style: style)
         registerTableViewCellsForReuse()
         tableView.cellLayoutMarginsFollowReadableWidth = true
         navigationItem.largeTitleDisplayMode = .never
-        navigationItem.searchController = UISearchController()
         self.sections = sections
     }
     
@@ -76,9 +73,5 @@ public class SettingsKitTableViewController: UITableViewController, UISearchResu
         } else {
             navigationController?.pushViewController(viewController, animated: true)
         }
-    }
-    
-    public func updateSearchResults(for searchController: UISearchController) {
-        
     }
 }
