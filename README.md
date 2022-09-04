@@ -1,4 +1,8 @@
 <p align="center">
+    <img src="Images/SettingsKit.png" width="600" max-width="90%" alt="SettingsKit" />
+</p>
+
+<p align="center">
     <img src="https://img.shields.io/badge/Swift-5.2-orange.svg" />
     <a href="https://swift.org/package-manager">
         <img src="https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat" alt="Swift Package Manager" />
