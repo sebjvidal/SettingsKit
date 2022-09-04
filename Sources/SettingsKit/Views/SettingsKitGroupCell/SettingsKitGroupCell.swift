@@ -30,7 +30,7 @@ class SettingsKitGroupCell: UITableViewCell, SettingsKitCell {
     }
     
     private func setupCell() {
-        separatorInset = UIEdgeInsets(top: 0, left: 64, bottom: 0, right: 0)
+        separatorInset = UIEdgeInsets(top: 0, left: setting.icon == nil ? 20 : 64, bottom: 0, right: 0)
         accessoryType = setting.children.isEmpty ? .none : .disclosureIndicator
     }
     
@@ -65,7 +65,12 @@ class SettingsKitGroupCell: UITableViewCell, SettingsKitCell {
         
         NSLayoutConstraint.activate([
             textView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            textView.leadingAnchor.constraint(equalTo: iconView.trailingAnchor, constant: 14)
+            textView.leadingAnchor.constraint(equalTo: iconViewLeadingAnchor, constant: 14)
         ])
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        textView.textColor = selected ? .white : .label
     }
 }

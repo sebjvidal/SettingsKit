@@ -1,6 +1,6 @@
 //
 //  SettingsKitSetting.swift
-//  
+//  SettingsKit
 //
 //  Created by Seb Vidal on 03/09/2022.
 //

@@ -1,18 +1,35 @@
+//
+//  SettingsKitTableViewController.swift
+//  SettingsKit
+//
+//  Created by Seb Vidal on 03/09/2022.
+//
+
 import UIKit
 
-public class SettingsKitViewController: UITableViewController {
+public class SettingsKitTableViewController: UITableViewController, UISearchResultsUpdating {
     var sections: [SettingsKitSecetion] = []
+    var delegate: SettingsKitTableViewControllerDelegate?
+    
+    private let searchController = UISearchController()
     
     public init(sections: [SettingsKitSecetion], style: UITableView.Style = .insetGrouped) {
         super.init(style: style)
-        tableView.register(SettingsKitGroupCell.self, forCellReuseIdentifier: "SettingsKitGroupCell")
-        tableView.register(SettingsKitToggleCell.self, forCellReuseIdentifier: "SettingsKitToggleCell")
-        tableView.register(SettingsTextFieldCell.self, forCellReuseIdentifier: "SettingsTextFieldCell")
+        registerTableViewCellsForReuse()
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.searchController = UISearchController()
         self.sections = sections
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func registerTableViewCellsForReuse() {
+        tableView.register(SettingsKitGroupCell.self, forCellReuseIdentifier: "SettingsKitGroupCell")
+        tableView.register(SettingsKitToggleCell.self, forCellReuseIdentifier: "SettingsKitToggleCell")
+        tableView.register(SettingsTextFieldCell.self, forCellReuseIdentifier: "SettingsTextFieldCell")
     }
     
     public override func numberOfSections(in tableView: UITableView) -> Int {
@@ -51,9 +68,17 @@ public class SettingsKitViewController: UITableViewController {
     
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let setting = sections[indexPath.section].settings[indexPath.row]
-        let viewController = SettingsKitViewController(sections: setting.children)
+        let viewController = SettingsKitTableViewController(sections: setting.children)
         viewController.navigationItem.title = setting.title
         
-        navigationController?.pushViewController(viewController, animated: true)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            delegate?.showDetailViewController(viewController)
+        } else {
+            navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    public func updateSearchResults(for searchController: UISearchController) {
+        
     }
 }
