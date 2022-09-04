@@ -56,6 +56,13 @@ let viewController = SettingsKitViewController(sections: sections)
 ```
 The `children` property of `SettingsKitSections` takes an array of `SettingsKitSections`, so you can go as many layers deep as you need.
 
+The root `SettingsKitViewController` navigation elements can be customised as follows.
+```swift
+viewController.title = "SettingsKit"
+viewController.navigationItem.largeTitleDisplayMode = .automatic
+viewController.navigationController?.navigationBar.prefersLargeTitles = true
+```
+
 ## About
 SettingsKit is built with UIKit, so you can customise the `SettingsKitViewController` as you would a `UITableViewController`.
 
