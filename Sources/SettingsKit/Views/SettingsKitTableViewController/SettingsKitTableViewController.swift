@@ -11,7 +11,10 @@ public class SettingsKitTableViewController: UITableViewController {
     var sections: [SettingsKitSection] = []
     var delegate: SettingsKitTableViewControllerDelegate?
     
-    public init(sections: [SettingsKitSecetion], style: UITableView.Style = .insetGrouped) {
+    let isRoot: Bool
+    
+    public init(sections: [SettingsKitSection], style: UITableView.Style = .insetGrouped, isRoot: Bool = false) {
+        self.isRoot = isRoot
         super.init(style: style)
         registerTableViewCellsForReuse()
         tableView.cellLayoutMarginsFollowReadableWidth = true
@@ -51,7 +54,7 @@ public class SettingsKitTableViewController: UITableViewController {
         let reuseIdentifier = setting.cellReuseIdentifier()
         
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as! SettingsKitCell
-        cell.setupCell(with: setting)
+        cell.setupCell(with: setting, parent: self)
         
         return cell
     }
@@ -69,7 +72,7 @@ public class SettingsKitTableViewController: UITableViewController {
         let viewController = SettingsKitTableViewController(sections: setting.children)
         viewController.navigationItem.title = setting.title
         
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if UIDevice.current.userInterfaceIdiom == .pad && isRoot {
             delegate?.showDetailViewController(viewController)
         } else {
             navigationController?.pushViewController(viewController, animated: true)

@@ -30,7 +30,7 @@ To create a new settings screen, create an array of `SettingsKitSections`. A sec
 import SettingsKit
 
 let sections: [SettingsKitSection] = [
-    SettingsKitSecetion(
+    SettingsKitSection(
         settings: [
             SettingsKitGroup(
                 icon: SettingsKitIcon(
@@ -40,8 +40,9 @@ let sections: [SettingsKitSection] = [
                 ),
                 title: "General",
                 children: [
-                    SettingsKitSecetion(
+                    SettingsKitSection(
                         settings: [
+                            SettingsKitLabel(title: "A Label Cell", key: "label")
                             SettingsKitToggle(title: "A Toggle Cell", key: "toggle")
                             SettingsKitTextField(title: "A TextField Cell", key: "textField")
                         ]

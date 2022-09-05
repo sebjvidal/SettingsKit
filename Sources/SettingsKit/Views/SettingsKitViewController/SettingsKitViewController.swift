@@ -24,11 +24,11 @@ public class SettingsKitViewController: UISplitViewController, UISplitViewContro
         }
     }
     
-    private var sections: [SettingsKitSecetion]
+    private var sections: [SettingsKitSection]
     private var settingsViewController: SettingsKitTableViewController!
     private var mainViewController: UINavigationController!
     
-    public init(sections: [SettingsKitSecetion]) {
+    public init(sections: [SettingsKitSection]) {
         self.sections = sections
         super.init(style: .doubleColumn)
         setupSplitViewController()
@@ -39,14 +39,14 @@ public class SettingsKitViewController: UISplitViewController, UISplitViewContro
     }
     
     private func setupSplitViewController() {
-        settingsViewController = SettingsKitTableViewController(sections: sections)
+        settingsViewController = SettingsKitTableViewController(sections: sections, isRoot: true)
         settingsViewController.delegate = self
         
         mainViewController = UINavigationController(rootViewController: settingsViewController)
         
         setViewController(mainViewController, for: .primary)
-//        preferredDisplayMode = .twoBesideSecondary
-//        preferredSplitBehavior = .tile
+        setViewController(UITableViewController(style: .insetGrouped), for: .secondary)
+        presentsWithGesture = false
         delegate = self
     }
     

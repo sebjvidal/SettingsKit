@@ -21,7 +21,7 @@ class SettingsKitToggleCell: UITableViewCell, SettingsKitCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCell(with setting: SettingsKitSetting) {
+    func setupCell(with setting: SettingsKitSetting, parent: SettingsKitTableViewController) {
         self.setting = setting as? SettingsKitToggle
         
         setupCell()
@@ -31,6 +31,7 @@ class SettingsKitToggleCell: UITableViewCell, SettingsKitCell {
     
     private func setupCell() {
         isUserInteractionEnabled = true
+        separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
     }
     
     private func setupTextView() {
