@@ -10,7 +10,7 @@ import UIKit
 class SettingsKitToggleCell: UITableViewCell, SettingsKitCell {
     private var setting: SettingsKitToggle!
 
-    private var textView: UILabel!
+    private var titleLabel: UILabel!
     private var switchView: UISwitch!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -25,7 +25,7 @@ class SettingsKitToggleCell: UITableViewCell, SettingsKitCell {
         self.setting = setting as? SettingsKitToggle
         
         setupCell()
-        setupTextView()
+        setupTitleLabel()
         setupSwitchView()
     }
     
@@ -34,17 +34,17 @@ class SettingsKitToggleCell: UITableViewCell, SettingsKitCell {
         separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
     }
     
-    private func setupTextView() {
-        textView = UILabel()
-        textView.text = setting.title
-        textView.font = .systemFont(ofSize: 17)
-        textView.translatesAutoresizingMaskIntoConstraints = false
+    private func setupTitleLabel() {
+        titleLabel = UILabel()
+        titleLabel.text = setting.title
+        titleLabel.font = .systemFont(ofSize: 17)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        addSubview(textView)
+        addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
-            textView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            textView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
+            titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
         ])
     }
     

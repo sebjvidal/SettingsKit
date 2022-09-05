@@ -8,10 +8,10 @@
 import UIKit
 
 public struct SettingsKitTextField: SettingsKitSetting {
-    public var title: String
-    public var children: [SettingsKitSection]
-    public var type: UIKeyboardType
-    public var key: String?
+    public let title: String
+    public let children: [SettingsKitSection]
+    public let type: UIKeyboardType
+    public let key: String?
     
     public init(title: String, key: String) {
         self.title = title

@@ -8,9 +8,9 @@
 import Foundation
 
 public struct SettingsKitSection {
-    var settings: [SettingsKitSetting]
-    var header: String?
-    var footer: String?
+    let settings: [SettingsKitSetting]
+    let header: String?
+    let footer: String?
     
     public init(settings: [SettingsKitSetting], header: String? = nil, footer: String? = nil) {
         self.settings = settings

@@ -8,10 +8,10 @@
 import UIKit
 
 public struct SettingsKitGroup: SettingsKitSetting {
-    public var icon: Icon?
-    public var title: String
-    public var children: [SettingsKitSection]
-    public var key: String?
+    public let icon: Icon?
+    public let title: String
+    public let children: [SettingsKitSection]
+    public let key: String?
     
     public init(icon: Icon? = nil, title: String, children: [SettingsKitSection] = []) {
         self.icon = icon
@@ -37,7 +37,7 @@ public extension SettingsKitGroup {
             self.colour = colour
         }
         
-        lazy var view: UIView = {
+        func view() -> UIView {
             let iconView = UIView()
             iconView.clipsToBounds = true
             iconView.layer.cornerRadius = 6.5
@@ -61,6 +61,6 @@ public extension SettingsKitGroup {
             ])
             
             return iconView
-        }()
+        }
     }
 }

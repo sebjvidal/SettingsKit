@@ -12,7 +12,7 @@ class SettingsKitGroupCell: UITableViewCell, SettingsKitCell {
     private weak var parent: SettingsKitTableViewController?
     
     private var iconView = UIView()
-    private var textView = UILabel()
+    private var titleLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -28,7 +28,7 @@ class SettingsKitGroupCell: UITableViewCell, SettingsKitCell {
         
         setupCell()
         setupIconView()
-        setupTextView()
+        setupTitleLabel()
     }
     
     private func setupCell() {
@@ -45,7 +45,7 @@ class SettingsKitGroupCell: UITableViewCell, SettingsKitCell {
     
     private func setupIconView() {
         if let view = setting.icon?.view {
-            iconView = view
+            iconView = view()
             
             addSubview(iconView)
             
@@ -57,12 +57,12 @@ class SettingsKitGroupCell: UITableViewCell, SettingsKitCell {
         
     }
     
-    private func setupTextView() {
-        textView.text = setting.title
-        textView.font = .systemFont(ofSize: 17)
-        textView.translatesAutoresizingMaskIntoConstraints = false
+    private func setupTitleLabel() {
+        titleLabel.text = setting.title
+        titleLabel.font = .systemFont(ofSize: 17)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        addSubview(textView)
+        addSubview(titleLabel)
         
         var iconViewLeadingAnchor: NSLayoutXAxisAnchor {
             return setting.icon != nil ? iconView.trailingAnchor : leadingAnchor
@@ -73,15 +73,15 @@ class SettingsKitGroupCell: UITableViewCell, SettingsKitCell {
         }
         
         NSLayoutConstraint.activate([
-            textView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            textView.leadingAnchor.constraint(equalTo: iconViewLeadingAnchor, constant: iconViewLeadingConstant)
+            titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: iconViewLeadingAnchor, constant: iconViewLeadingConstant)
         ])
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if UIDevice.current.userInterfaceIdiom == .pad {
-            textView.textColor = selected ? .white : .label
+            titleLabel.textColor = selected ? .white : .label
         }
     }
 }
