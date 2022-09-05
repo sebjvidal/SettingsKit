@@ -49,7 +49,7 @@ let sections: [SettingsKitSection] = [
                             SettingsKitLabel(title: "A Label Cell", key: "label")
                             SettingsKitToggle(title: "A Toggle Cell", key: "toggle")
                             SettingsKitTextField(title: "A TextField Cell", key: "textField")
-                            SettingsKitStepper(title: "A Stepper Cell", key: "stepper", min: 0, max: 0)
+                            SettingsKitStepper(title: "A Stepper Cell", key: "stepper", min: 0, max: 10)
                         ]
                     )
                 ]
