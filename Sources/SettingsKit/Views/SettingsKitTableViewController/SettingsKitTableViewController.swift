@@ -8,7 +8,7 @@
 import UIKit
 
 public class SettingsKitTableViewController: UITableViewController {
-    var sections: [SettingsKitSecetion] = []
+    var sections: [SettingsKitSection] = []
     var delegate: SettingsKitTableViewControllerDelegate?
     
     public init(sections: [SettingsKitSecetion], style: UITableView.Style = .insetGrouped) {

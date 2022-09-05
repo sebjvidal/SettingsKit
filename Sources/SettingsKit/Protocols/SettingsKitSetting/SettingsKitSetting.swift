@@ -9,7 +9,7 @@ import Foundation
 
 public protocol SettingsKitSetting {
     var title: String { get }
-    var children: [SettingsKitSecetion] { get }
+    var children: [SettingsKitSection] { get }
     var key: String? { get }
     
     func cellReuseIdentifier() -> String

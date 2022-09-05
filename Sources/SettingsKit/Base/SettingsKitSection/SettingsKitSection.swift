@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SettingsKitSecetion {
+public struct SettingsKitSection {
     var settings: [SettingsKitSetting]
     var header: String?
     var footer: String?

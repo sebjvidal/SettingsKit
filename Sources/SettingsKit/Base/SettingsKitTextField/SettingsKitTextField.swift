@@ -9,7 +9,7 @@ import UIKit
 
 public struct SettingsKitTextField: SettingsKitSetting {
     public var title: String
-    public var children: [SettingsKitSecetion]
+    public var children: [SettingsKitSection]
     public var type: UIKeyboardType
     public var key: String?
     
@@ -28,6 +28,6 @@ public struct SettingsKitTextField: SettingsKitSetting {
     }
     
     public func cellReuseIdentifier() -> String {
-        return "SettingsTextFieldCell"
+        return "SettingsKitTextFieldCell"
     }
 }

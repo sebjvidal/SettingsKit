@@ -10,10 +10,10 @@ import UIKit
 public struct SettingsKitGroup: SettingsKitSetting {
     public var icon: Icon?
     public var title: String
-    public var children: [SettingsKitSecetion]
+    public var children: [SettingsKitSection]
     public var key: String?
     
-    public init(icon: Icon? = nil, title: String, children: [SettingsKitSecetion] = []) {
+    public init(icon: Icon? = nil, title: String, children: [SettingsKitSection] = []) {
         self.icon = icon
         self.title = title
         self.children = children

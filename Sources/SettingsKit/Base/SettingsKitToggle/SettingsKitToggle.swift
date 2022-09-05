@@ -9,7 +9,7 @@ import UIKit
 
 public struct SettingsKitToggle: SettingsKitSetting {
     public var title: String
-    public var children: [SettingsKitSecetion]
+    public var children: [SettingsKitSection]
     public var key: String?
     
     public init(title: String, key: String) {
