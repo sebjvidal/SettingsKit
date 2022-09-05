@@ -17,8 +17,7 @@ public class SettingsKitTableViewController: UITableViewController {
         self.isRoot = isRoot
         super.init(style: style)
         registerTableViewCellsForReuse()
-        tableView.cellLayoutMarginsFollowReadableWidth = true
-        navigationItem.largeTitleDisplayMode = .never
+        setupTableViewController()
         self.sections = sections
     }
     
@@ -30,7 +29,13 @@ public class SettingsKitTableViewController: UITableViewController {
         tableView.register(SettingsKitGroupCell.self, forCellReuseIdentifier: "SettingsKitGroupCell")
         tableView.register(SettingsKitLabelCell.self, forCellReuseIdentifier: "SettingsKitLabelCell")
         tableView.register(SettingsKitToggleCell.self, forCellReuseIdentifier: "SettingsKitToggleCell")
+        tableView.register(SettingsKitStepperCell.self, forCellReuseIdentifier: "SettingsKitStepperCell")
         tableView.register(SettingsKitTextFieldCell.self, forCellReuseIdentifier: "SettingsKitTextFieldCell")
+    }
+    
+    private func setupTableViewController() {
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     public override func numberOfSections(in tableView: UITableView) -> Int {

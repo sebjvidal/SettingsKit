@@ -10,7 +10,7 @@ import UIKit
 class SettingsKitTextFieldCell: UITableViewCell, UITextFieldDelegate, SettingsKitCell {
     private var setting: SettingsKitTextField!
     
-    private var label: UILabel!
+    private var titleLabel: UILabel!
     private var textView: UITextField!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -25,7 +25,7 @@ class SettingsKitTextFieldCell: UITableViewCell, UITextFieldDelegate, SettingsKi
         self.setting = setting as? SettingsKitTextField
         
         setupCell()
-        setupTextView()
+        setupTitleLabel()
         setupTextField()
     }
     
@@ -34,17 +34,17 @@ class SettingsKitTextFieldCell: UITableViewCell, UITextFieldDelegate, SettingsKi
         separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
     }
     
-    private func setupTextView() {
-        label = UILabel()
-        label.text = setting.title
-        label.font = .systemFont(ofSize: 17)
-        label.translatesAutoresizingMaskIntoConstraints = false
+    private func setupTitleLabel() {
+        titleLabel = UILabel()
+        titleLabel.text = setting.title
+        titleLabel.font = .systemFont(ofSize: 17)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        addSubview(label)
+        addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
-            label.centerYAnchor.constraint(equalTo: centerYAnchor),
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
+            titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
         ])
     }
     
@@ -67,7 +67,7 @@ class SettingsKitTextFieldCell: UITableViewCell, UITextFieldDelegate, SettingsKi
         NSLayoutConstraint.activate([
             textView.centerYAnchor.constraint(equalTo: centerYAnchor),
             textView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -22),
-            textView.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: 16)
+            textView.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 16)
         ])
     }
     
