@@ -1,5 +1,9 @@
 <p align="center">
-    <img src="Images/SettingsKit.png" width="600" max-width="90%" alt="SettingsKit" />
+    <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://github.com/sebjvidal/SettingsKit/blob/main/Images/SettingsKit-Dark.png">
+        <source media="(prefers-color-scheme: light)" srcset="https://github.com/sebjvidal/SettingsKit/blob/main/Images/SettingsKit-Light.png">
+        <img alt="SettingsKit." src="https://github.com/sebjvidal/SettingsKit/blob/main/Images/SettingsKit-Light.png" width="600">
+    </picture>
 </p>
 
 <p align="center">
