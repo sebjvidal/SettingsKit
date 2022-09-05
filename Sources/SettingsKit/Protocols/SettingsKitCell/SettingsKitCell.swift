@@ -8,5 +8,5 @@
 import UIKit
 
 public protocol SettingsKitCell: UITableViewCell {
-    func setupCell(with setting: SettingsKitSetting)
+    func setupCell(with setting: SettingsKitSetting, parent: SettingsKitTableViewController)
 }

@@ -1,5 +1,5 @@
 //
-//  SettingsTextFieldCell.swift
+//  SettingsKitTextFieldCell.swift
 //  SettingsKit
 //
 //  Created by Seb Vidal on 29/08/2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingsTextFieldCell: UITableViewCell, UITextFieldDelegate, SettingsKitCell {
+class SettingsKitTextFieldCell: UITableViewCell, UITextFieldDelegate, SettingsKitCell {
     private var setting: SettingsKitTextField!
     
     private var label: UILabel!
@@ -21,7 +21,7 @@ class SettingsTextFieldCell: UITableViewCell, UITextFieldDelegate, SettingsKitCe
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCell(with setting: SettingsKitSetting) {
+    func setupCell(with setting: SettingsKitSetting, parent: SettingsKitTableViewController) {
         self.setting = setting as? SettingsKitTextField
         
         setupCell()
@@ -31,6 +31,7 @@ class SettingsTextFieldCell: UITableViewCell, UITextFieldDelegate, SettingsKitCe
     
     private func setupCell() {
         isUserInteractionEnabled = true
+        separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
     }
     
     private func setupTextView() {

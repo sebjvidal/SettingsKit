@@ -25,8 +25,9 @@ public class SettingsKitTableViewController: UITableViewController {
     
     private func registerTableViewCellsForReuse() {
         tableView.register(SettingsKitGroupCell.self, forCellReuseIdentifier: "SettingsKitGroupCell")
+        tableView.register(SettingsKitLabelCell.self, forCellReuseIdentifier: "SettingsKitLabelCell")
         tableView.register(SettingsKitToggleCell.self, forCellReuseIdentifier: "SettingsKitToggleCell")
-        tableView.register(SettingsTextFieldCell.self, forCellReuseIdentifier: "SettingsTextFieldCell")
+        tableView.register(SettingsKitTextFieldCell.self, forCellReuseIdentifier: "SettingsKitTextFieldCell")
     }
     
     public override func numberOfSections(in tableView: UITableView) -> Int {
