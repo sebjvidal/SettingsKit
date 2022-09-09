@@ -82,6 +82,15 @@ viewController.navigationItem.largeTitleDisplayMode = .automatic
 viewController.navigationController?.navigationBar.prefersLargeTitles = true
 ```
 
+This is what your finished product should look like...
+<p>
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/sebjvidal/SettingsKit/blob/main/Images/Demo-Dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="https://github.com/sebjvidal/SettingsKit/blob/main/Images/Demo-Light.png">
+    <img alt="SettingsKit." src="https://github.com/sebjvidal/SettingsKit/blob/main/Images/Demo-Light.png" width="600">
+</picture>
+</p>
+
 ## About
 SettingsKit is built with UIKit, so you can customise the `SettingsKitViewController` as you would a `UITableViewController`.
 
