@@ -29,40 +29,53 @@ SettingsKit can be installed using Swift Package Manager. To get started...
 4. Click `Add Package`
 
 ## Usage
-To create a new settings screen, create an array of `SettingsKitSections`. A section has a `children` and optional `header` and `footer` parameters.
+In the following example, you'll learn how to build a settings screen with a single "General" group that has four child settings.
+
+To begin, create an `Array` with a single `SettingsKitSection` object, parsing an `Array` of `SettingsKitSetting` to its `setting` initialiser.
+
 ```swift
 import SettingsKit
 
-let sections: [SettingsKitSection] = [
+let generalSections: [SettingsKitSection] = [
     SettingsKitSection(
         settings: [
-            SettingsKitGroup(
-                icon: SettingsKitIcon(
-                    symbol: UIImage(systemName: "gear"),
-                    config: UIImage.SymbolConfiguration(pointSize: 21),
-                    colour: .systemGray
-                ),
-                title: "General",
-                children: [
-                    SettingsKitSection(
-                        settings: [
-                            SettingsKitLabel(title: "A Label Cell", key: "label")
-                            SettingsKitToggle(title: "A Toggle Cell", key: "toggle")
-                            SettingsKitTextField(title: "A TextField Cell", key: "textField")
-                            SettingsKitStepper(title: "A Stepper Cell", key: "stepper", min: 0, max: 10)
-                        ]
-                    )
-                ]
-            )
+            SettingsKitLabel(title: "A Label Cell", key: "label"),
+            SettingsKitToggle(title: "A Toggle Cell", key: "toggle"),
+            SettingsKitTextField(title: "A TextField Cell", key: "textField"),
+            SettingsKitStepper(title: "A Stepper Cell", key: "stepper", min: 0, max: 10)
         ]
     )
 ]
-
-let viewController = SettingsKitViewController(sections: sections)
 ```
-The `children` property of `SettingsKitSections` takes an array of `SettingsKitSections`, so you can go as many layers deep as you need.
+Each object conforming to the `SettingsKitSetting` protocol has a `key` property of type `String?`. This is the key used to access the associated value, stored in `UserDefaults`.
 
-The root `SettingsKitViewController` navigation elements can be customised as follows.
+Next, we'll build the `SettingsKitGroup` and, subsequently the `SettingsKitGroup.Icon`. Start by creating the `SettingsKitGroup.Icon` and populating its `symbol`, `config` and `colour` initialisers with a `UIImage`, `UIImage.SymbolConfiguration` and `UIColor`, respectively.
+
+```swift
+let generalIcon = SettingsKitGroup.Icon(
+    symbol: UIImage(systemName: "gear"),
+    config: UIImage.SymbolConfiguration(pointSize: 21),
+    colour: UIColor.systemGray
+)
+```
+
+Now, define a second `Array` of `SettingsKitSection`, passing an `Array` of `SettingsKitSetting` to its `settings` parameter. Populate the `SettingsKitSetting` `Array` with a single `SettingsKitGroup` object. Set the `icon` parameter to the `generalIcon` created above. Set the `title` parameter to `"General"`. And set the `children` parameter to the `generalSections` array.
+```swift
+let rootSections: [SettingsKitSection] = [
+    SettingsKitSection(
+        settings: [
+            SettingsKitGroup(icon: generalIcon, title: "General", children: generalSections)
+        ]
+    )
+]
+```
+
+Finally, create the `SettingsKitViewController`, populating the `sections` parameter with the previously defined `rootSections` `Array`.
+```swift
+let viewController = SettingsKitViewController(sections: rootSections)
+```
+
+Additionally, the root `SettingsKitViewController` navigation elements can be customised as follows.
 ```swift
 viewController.title = "SettingsKit"
 viewController.navigationItem.largeTitleDisplayMode = .automatic
