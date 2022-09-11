@@ -69,12 +69,14 @@ public class SettingsKitTableViewController: UITableViewController {
     }
     
     public override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return !sections[indexPath.section].settings[indexPath.row].children.isEmpty
+        guard let children = sections[indexPath.section].settings[indexPath.row].children else { return false }
+        
+        return !children.isEmpty
     }
     
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let setting = sections[indexPath.section].settings[indexPath.row]
-        let viewController = SettingsKitTableViewController(sections: setting.children)
+        let viewController = SettingsKitTableViewController(sections: setting.children ?? [])
         viewController.navigationItem.title = setting.title
         
         if UIDevice.current.userInterfaceIdiom == .pad && isRoot {

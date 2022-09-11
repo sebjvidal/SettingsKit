@@ -21,7 +21,7 @@ class SettingsKitTextFieldCell: UITableViewCell, UITextFieldDelegate, SettingsKi
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCell(with setting: SettingsKitSetting, parent: SettingsKitTableViewController) {
+    func setupCell(with setting: any SettingsKitSetting, parent: SettingsKitTableViewController) {
         self.setting = setting as? SettingsKitTextField
         
         setupCell()
@@ -51,16 +51,13 @@ class SettingsKitTextFieldCell: UITableViewCell, UITextFieldDelegate, SettingsKi
     private func setupTextField() {
         textView = UITextField()
         textView.delegate = self
+        textView.text = stringValue()
         textView.returnKeyType = .done
         textView.textAlignment = .right
         textView.textColor = .secondaryLabel
         textView.keyboardType = setting.type
         textView.font = .systemFont(ofSize: 17)
         textView.translatesAutoresizingMaskIntoConstraints = false
-        
-        if let key = setting.key {
-            textView.text = UserDefaults.standard.string(forKey: key)
-        }
         
         contentView.addSubview(textView)
         
@@ -71,12 +68,27 @@ class SettingsKitTextFieldCell: UITableViewCell, UITextFieldDelegate, SettingsKi
         ])
     }
     
+    private func stringValue() -> String? {
+        if let value = setting.value {
+            switch value {
+            case .string(let string):
+                return string
+            case .userDefaults(let key):
+                return UserDefaults.standard.string(forKey: key)
+            }
+        }
+        
+        return nil
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        UserDefaults.standard.set(textField.text, forKey: setting.key!)
+        if case let .userDefaults(key) = setting.value {
+            UserDefaults.standard.set(textField.text, forKey: key)
+        }
     }
 }

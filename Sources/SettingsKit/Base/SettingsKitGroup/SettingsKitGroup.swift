@@ -10,14 +10,16 @@ import UIKit
 public struct SettingsKitGroup: SettingsKitSetting {
     public let icon: Icon?
     public let title: String
-    public let children: [SettingsKitSection]
-    public let key: String?
+    public let children: [SettingsKitSection]?
+    public let value: Value?
     
-    public init(icon: Icon? = nil, title: String, children: [SettingsKitSection] = []) {
+    public enum Value {}
+    
+    public init(icon: Icon? = nil, title: String, children: [SettingsKitSection]? = nil) {
         self.icon = icon
         self.title = title
         self.children = children
-        self.key = nil
+        self.value = nil
     }
     
     public func cellReuseIdentifier() -> String {

@@ -8,11 +8,11 @@
 import Foundation
 
 public struct SettingsKitSection {
-    let settings: [SettingsKitSetting]
+    let settings: [any SettingsKitSetting]
     let header: String?
     let footer: String?
     
-    public init(settings: [SettingsKitSetting], header: String? = nil, footer: String? = nil) {
+    public init(settings: [any SettingsKitSetting], header: String? = nil, footer: String? = nil) {
         self.settings = settings
         self.header = header
         self.footer = footer

@@ -22,7 +22,7 @@ class SettingsKitStepperCell: UITableViewCell, SettingsKitCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCell(with setting: SettingsKitSetting, parent: SettingsKitTableViewController) {
+    func setupCell(with setting: any SettingsKitSetting, parent: SettingsKitTableViewController) {
         self.setting = setting as? SettingsKitStepper
         
         setupCell()
@@ -52,10 +52,10 @@ class SettingsKitStepperCell: UITableViewCell, SettingsKitCell {
     
     private func setupStepperView() {
         stepperView = UIStepper()
+        stepperView.value = doubleValue()
         stepperView.minimumValue = setting.min
         stepperView.maximumValue = setting.max
         stepperView.translatesAutoresizingMaskIntoConstraints = false
-        stepperView.value = UserDefaults.standard.double(forKey: setting.key!)
         stepperView.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
         
         contentView.addSubview(stepperView)
@@ -66,9 +66,25 @@ class SettingsKitStepperCell: UITableViewCell, SettingsKitCell {
         ])
     }
     
+    private func doubleValue() -> Double {
+        if let value = setting.value {
+            switch value {
+            case .double(let double):
+                return double
+            case .userDefaults(let key):
+                return UserDefaults.standard.double(forKey: key)
+            }
+        }
+        
+        return 0.0
+    }
+    
     @objc private func stepperValueChanged(_ sender: UIStepper) {
-        UserDefaults.standard.set(sender.value, forKey: setting.key!)
         detailLabel.text = String(Int(sender.value))
+        
+        if case let .userDefaults(key) = setting.value {
+            UserDefaults.standard.set(sender.value, forKey: key)
+        }
     }
     
     private func setupDetailLabel() {
@@ -76,7 +92,7 @@ class SettingsKitStepperCell: UITableViewCell, SettingsKitCell {
         detailLabel.textColor = .secondaryLabel
         detailLabel.font = .systemFont(ofSize: 17)
         detailLabel.translatesAutoresizingMaskIntoConstraints = false
-        detailLabel.text = String(Int(UserDefaults.standard.double(forKey: setting.key!)))
+        detailLabel.text = String(Int(doubleValue()))
         
         addSubview(detailLabel)
         

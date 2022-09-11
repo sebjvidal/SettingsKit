@@ -22,7 +22,7 @@ class SettingsKitGroupCell: UITableViewCell, SettingsKitCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCell(with setting: SettingsKitSetting, parent: SettingsKitTableViewController) {
+    func setupCell(with setting: any SettingsKitSetting, parent: SettingsKitTableViewController) {
         self.setting = setting as? SettingsKitGroup
         self.parent = parent
         
@@ -34,12 +34,14 @@ class SettingsKitGroupCell: UITableViewCell, SettingsKitCell {
     private func setupCell() {
         separatorInset = UIEdgeInsets(top: 0, left: setting.icon == nil ? 20 : 64, bottom: 0, right: 0)
         
+        guard let children = setting.children else { return }
+        
         if UIDevice.current.userInterfaceIdiom == .pad {
             if let isRoot = parent?.isRoot, !isRoot {
-                accessoryType = setting.children.isEmpty ? .none : .disclosureIndicator
+                accessoryType = children.isEmpty ? .none : .disclosureIndicator
             }
         } else {
-            accessoryType = setting.children.isEmpty ? .none : .disclosureIndicator
+            accessoryType = children.isEmpty ? .none : .disclosureIndicator
         }
     }
     

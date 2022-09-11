@@ -21,7 +21,7 @@ class SettingsKitLabelCell: UITableViewCell, SettingsKitCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCell(with setting: SettingsKitSetting, parent: SettingsKitTableViewController) {
+    func setupCell(with setting: any SettingsKitSetting, parent: SettingsKitTableViewController) {
         self.setting = setting as? SettingsKitLabel
         
         setupCell()
@@ -53,7 +53,7 @@ class SettingsKitLabelCell: UITableViewCell, SettingsKitCell {
         detailLabel.textColor = .secondaryLabel
         detailLabel.font = .systemFont(ofSize: 17)
         detailLabel.translatesAutoresizingMaskIntoConstraints = false
-        detailLabel.text = UserDefaults.standard.string(forKey: setting.key!)
+        detailLabel.text = stringValue()
         
         addSubview(detailLabel)
         
@@ -61,5 +61,18 @@ class SettingsKitLabelCell: UITableViewCell, SettingsKitCell {
             detailLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             detailLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -22),
         ])
+    }
+    
+    func stringValue() -> String? {
+        if let value = setting.value {
+            switch value {
+            case .userDefaults(let key):
+                return UserDefaults.standard.string(forKey: key)
+            case .string(let string):
+                return string
+            }
+        }
+        
+        return nil
     }
 }

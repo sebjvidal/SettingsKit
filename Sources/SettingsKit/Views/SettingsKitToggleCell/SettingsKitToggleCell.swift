@@ -21,7 +21,7 @@ class SettingsKitToggleCell: UITableViewCell, SettingsKitCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCell(with setting: SettingsKitSetting, parent: SettingsKitTableViewController) {
+    func setupCell(with setting: any SettingsKitSetting, parent: SettingsKitTableViewController) {
         self.setting = setting as? SettingsKitToggle
         
         setupCell()
@@ -50,14 +50,9 @@ class SettingsKitToggleCell: UITableViewCell, SettingsKitCell {
     
     private func setupSwitchView() {
         switchView = UISwitch()
+        switchView.isOn = boolValue()
         switchView.translatesAutoresizingMaskIntoConstraints = false
-        switchView.isOn = UserDefaults.standard.bool(forKey: setting.key!)
         switchView.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
-        
-        
-        if let key = setting.key {
-            switchView.isOn = UserDefaults.standard.bool(forKey: key)
-        }
         
         contentView.addSubview(switchView)
         
@@ -67,7 +62,22 @@ class SettingsKitToggleCell: UITableViewCell, SettingsKitCell {
         ])
     }
     
+    private func boolValue() -> Bool {
+        if let value = setting.value {
+            switch value {
+            case .bool(let bool):
+                return bool
+            case .userDefaults(let key):
+                return UserDefaults.standard.bool(forKey: key)
+            }
+        }
+        
+        return false
+    }
+    
     @objc private func switchValueChanged(_ sender: UISwitch) {
-        UserDefaults.standard.set(sender.isOn, forKey: setting.key!)
+        if case let .userDefaults(key) = setting.value {
+            UserDefaults.standard.set(sender.isOn, forKey: key)
+        }
     }
 }
