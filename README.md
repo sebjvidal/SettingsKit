@@ -39,15 +39,15 @@ import SettingsKit
 let generalSections: [SettingsKitSection] = [
     SettingsKitSection(
         settings: [
-            SettingsKitLabel(title: "A Label Cell", key: "label"),
-            SettingsKitToggle(title: "A Toggle Cell", key: "toggle"),
-            SettingsKitTextField(title: "A TextField Cell", key: "textField"),
-            SettingsKitStepper(title: "A Stepper Cell", key: "stepper", min: 0, max: 10)
+            SettingsKitLabel(title: "A Label Cell", value: .userDefaults(key: "label")),
+            SettingsKitToggle(title: "A Toggle Cell", value: .userDefaults(key: "toggle")),
+            SettingsKitTextField(title: "A TextField Cell", value: .userDefaults(key: "textField")),
+            SettingsKitStepper(title: "A Stepper Cell", value: .userDefaults(key: "stepper"), min: 0, max: 10)
         ]
     )
 ]
 ```
-Each object conforming to the `SettingsKitSetting` protocol has a `key` property of type `String?`. This is the key used to access the associated value, stored in `UserDefaults`.
+Each object conforming to the `SettingsKitSetting` protocol has a `value` property. This is an Enum case that can be a raw value, for example, `.string("String")`. Alternatively, this can be a UserDefaults key, for examlpe, `.userDefaults(key: "Key")`.
 
 Next, we'll build the `SettingsKitGroup` and, subsequently the `SettingsKitGroup.Icon`. Start by creating the `SettingsKitGroup.Icon` and populating its `symbol`, `config` and `colour` initialisers with a `UIImage`, `UIImage.SymbolConfiguration` and `UIColor`, respectively.
 
